@@ -49,15 +49,13 @@ YOUTUBE_CHANNEL_ID=""
 YOUTUBE_DATA_API_KEY=""
 BITLY_API_ACCESS_TOKEN=""
 
-MONGO_DB_CONNECTION_STRING="mongodb+srv://<USERNAME>:<PASSWORD>@cluster0-otaue.mongodb.net/<dbname>?retryWrites=true&w=majority"
+MONGO_DB_CONNECTION_STRING="mongodb+srv://<USERNAME>:<PASSWORD>@cluster0-otaue.mongodb.net/python_promoter?retryWrites=true&w=majority"
 MONGO_DB_NAME="python_promoter"
-MONGO_DB_COLLECTION_NAME="trendsDATA"
-MONGO_DB_COLLECTION_NAME="youtubeDATA"
 ```
 
 # How To Run
 Head into a cmd prompt or a terminal of some form and navigate to the root of this project. Then type in the following command.
 
 ```
-python3 start.py
+python3 main.py
 ```
