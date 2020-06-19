@@ -3,3 +3,4 @@ python-youtube==0.6.0
 tweepy==3.7.0
 tqdm==4.46.1
 pymongo==3.10.1
+dnspython==1.16.0
