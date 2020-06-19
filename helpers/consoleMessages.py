@@ -1,4 +1,4 @@
-from models.style import Style
+from helpers.style import Style
 import pprint
 
 def successMessage(message):

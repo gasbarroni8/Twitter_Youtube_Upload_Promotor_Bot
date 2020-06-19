@@ -15,7 +15,6 @@ import bitly_api
 import time
 sys.path.append(".")
 
-from models.style import Style
 from models.woeidLocations import WoeidLocations
 from models.locationTrends import LocationTrends
 from helpers.mongo import saveDataToMongoDB
@@ -27,7 +26,7 @@ from helpers.consoleMessages import errorMessage
 
 processedChannelDataID = None
 
-print('\n------------------------------------------')
+print('\n\n------------------------------------------------------------------------------------')
 print(sys.version, sys.platform, sys.executable)
 print('\n\nInitalised\n')
 
@@ -40,17 +39,12 @@ def fetchYoutubeData():
     api = Api(api_key=os.getenv('YOUTUBE_DATA_API_KEY'))
     channelById = api.get_channel_info(channel_id=os.getenv('YOUTUBE_CHANNEL_ID'))
 
-    successMessage('- Fetched youtube channel & video data...\n')
+    successMessage('- Fetched youtube channel & video data...')
 
-    channelUploadsPlaylistId = channelById.items[0].contentDetails.relatedPlaylists.uploads
-    allChannelVideos = api.get_playlist_items(
-      playlist_id=channelUploadsPlaylistId, 
-      count=30, 
-      limit=30
-    )
+    uploadsPlaylistId = channelById.items[0].contentDetails.relatedPlaylists.uploads
+    allChannelVideos = api.get_playlist_items(playlist_id=uploadsPlaylistId, count=30, limit=30)
+    successMessage('- Constructing youtube channel & video data...')
 
-    successMessage('- Constructing youtube channel & video data...\n')
-    
     processedData = []
     for video in allChannelVideos.items:
       processedData.append({
@@ -60,7 +54,6 @@ def fetchYoutubeData():
       })
 
     successMessage('- Storing youtube video & channel data...')
-
     processedChannelDataID = saveDataToMongoDB(
       {
         "thumbnail": channelById.items[0].snippet.thumbnails.high.url,
@@ -71,12 +64,11 @@ def fetchYoutubeData():
       "youtubeChannelData"
     )
     saveDataToMongoDB({ "_id": processedChannelDataID, "videos": processedData }, "youtubeVideoData")
-    
-    successMessage('- Completed storing youtube video & channel data...\n')
+    successMessage('- Completed storing youtube video & channel data...')
   except:
-    errorMessage('- An exception occurred\n')
+    errorMessage('- An exception occurred')
   else:
-    successMessage('- Completed youtube data step... \n')
+    successMessage('- Completed youtube data step... ')
 
 # def processYoutubeData():
 #   global videoData
@@ -100,9 +92,9 @@ def fetchYoutubeData():
 #         loop.update(1)
 #       loop.close()
 #     except:
-#       print(Style['red'], "- An exception occurred" + Style['white'])
+#       errorMessage("- An exception occurred")
 #     else:
-#       print(Style['green'], '- Finished Processing data...\n' + Style['white'])
+#       successMessage('- Finished Processing data...')
   
 def twitterBot():
   def twitterAuthenticate():
@@ -133,7 +125,7 @@ def twitterBot():
       countryLoop.update(1)
     countryLoop.close()
 
-    successMessage('- Finished fetching trending data...\n')
+    successMessage('- Finished fetching trending data...')
 
     def buildBestTargetTrends():
       # Need to process all the city data to gather the most trafficked hashtags

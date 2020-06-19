@@ -1,11 +1,11 @@
   
 import time
 from tqdm import tqdm
-from models.style import Style
+from helpers.style import Style
 from helpers.timeDifference import timeDifference
 
 def twitterRetryPolicy(rateNumber):
-    print(Style['white'])
+    # print(Style['white'])
     timeRemainingInSeconds = timeDifference(rateNumber)
     timeRunDownLoop = tqdm(total = timeRemainingInSeconds, position=0, leave=False)
     timeRunDownLoop.set_description(
@@ -15,4 +15,4 @@ def twitterRetryPolicy(rateNumber):
       time.sleep(1)
       timeRunDownLoop.update(1)
     timeRunDownLoop.close()
-    print(Style['green'])
+    # print(Style['green'])
