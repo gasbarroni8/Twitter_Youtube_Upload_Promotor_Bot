@@ -1,4 +1,4 @@
-## Twitter_Youtube_Upload_Promotor_Bot
+## Twitter_Youtube_Upload_Promotor_Bot -- (UNDER DEVELOPMENT - DOESNT WORK END TO END)
 
 # Installation
 I have provided a requirements.txt file in the root of this project to help install this scripts dependencies. Head over to the root of this project in the cmd or terminal and run the following command.
